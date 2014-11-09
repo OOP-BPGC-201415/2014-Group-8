@@ -16,21 +16,19 @@ import org.springframework.context.ApplicationContext;
  */
 public class ClientRepositoryTest extends TestCase{
 
-	public void testSave(){
+	Client c = new Client();
+
+	public void testClientRepository(){
 		SpringLoader sl = new SpringLoader();
 		ApplicationContext context = sl.getJpaContext();
 		ClientRepository cr = context.getBean(ClientRepository.class);
-		Client c = new Client();
+		int size = cr.findAll().size();
 		c.setUserName("test user");
 		assertEquals(cr.saveAndFlush(c), c);
+		assertEquals(cr.findOne(c.getId()).getUserName(), "test user");
+		cr.delete(c);
+		assertEquals(cr.findAll().size(), size);
 
-	}
-
-	public void testFindAll(){
-		SpringLoader sl = new SpringLoader();
-		ApplicationContext context = sl.getJpaContext();
-		ClientRepository cr = context.getBean(ClientRepository.class);
-		assertEquals(cr.findAll().get(0).getUserName(), "test user");
 	}
 
 
