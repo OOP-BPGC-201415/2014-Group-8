@@ -5,10 +5,13 @@
  */
 package bits.ewallet.entity;
 
+import bits.ewallet.enums.ClientType;
 import java.io.Serializable;
 import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -38,8 +41,9 @@ public class Client implements Serializable {
 	@Column(name = "change_date")
 	private Date changeDate;
 
-//	@Column(name = "type")
-//	private Type type;
+	@Column(name = "type")
+	@Enumerated(EnumType.STRING)
+	private ClientType type;
 
 	public Long getId() {
 		return id;
@@ -81,7 +85,7 @@ public class Client implements Serializable {
 		this.changeDate = changeDate;
 	}
 
-	
+
 
 	@Override
 	public int hashCode() {
