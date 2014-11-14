@@ -35,9 +35,9 @@ public class TransactionRecordRepositoryTest extends TestCase{
 		a.setBalance(0.0);
 		b.setAccountNumber("transactB");
 		b.setBalance(0.0);
-		ta.setAccount(a);
+		ta.setToAccount(a);
 		ta.setAmount(amount);
-		tb.setAccount(b);
+		tb.setToAccount(b);
 		tb.setAmount(-amount);
 		a.setBalance(a.getBalance()+amount);
 		b.setBalance(b.getBalance()-amount);

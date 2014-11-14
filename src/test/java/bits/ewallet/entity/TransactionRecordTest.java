@@ -18,8 +18,8 @@ public class TransactionRecordTest extends TestCase{
 		Account a = new Account();
 		tr.setAmount(500.0);
 		assertEquals(tr.getAmount(), 500.0);
-		assertEquals(tr.getAccount(), null);
-		tr.setAccount(a);
-		assertEquals(tr.getAccount(), a);
+		assertEquals(tr.getToAccount(), null);
+		tr.setToAccount(a);
+		assertEquals(tr.getToAccount(), a);
 	}
 }
