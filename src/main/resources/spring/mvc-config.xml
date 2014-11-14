@@ -22,15 +22,11 @@
 				<bean class="bits.ewallet.formatter.AccountFormatter"/>
 				<bean class="bits.ewallet.formatter.TransactionRecordFormatter"/>
 				<bean class="bits.ewallet.formatter.BillFormatter"/>
-				<!--
-				<bean class="in.co.webexports.mpc.convertor.TimestampFormatter"/>
-				<bean class="in.co.webexports.mpc.convertor.SqlDateFormatter"/>
-				-->
 			</set>
 		</property>
 	</bean>
 
-	<context:component-scan base-package="bits.ewallet" />
+	<context:component-scan base-package="bits.ewallet.controller" />
 
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 	<bean
