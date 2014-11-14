@@ -31,8 +31,12 @@ public class TransactionRecord implements Serializable {
 	private Long id;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "account_id", insertable = true, updatable = true)
-	private Account account;
+	@JoinColumn(name = "to_account_id", insertable = true, updatable = true)
+	private Account toAccount;
+
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "from_account_id", insertable = true, updatable = true)
+	private Account fromAccount;
 
 	@Column(name = "amount")
 	private Double amount;
@@ -48,12 +52,20 @@ public class TransactionRecord implements Serializable {
 		this.id = id;
 	}
 
-	public Account getAccount() {
-		return account;
+	public Account getToAccount() {
+		return toAccount;
 	}
 
-	public void setAccount(Account account) {
-		this.account = account;
+	public void setToAccount(Account toAccount) {
+		this.toAccount = toAccount;
+	}
+
+	public Account getFromAccount() {
+		return fromAccount;
+	}
+
+	public void setFromAccount(Account fromAccount) {
+		this.fromAccount = fromAccount;
 	}
 
 	public Double getAmount() {

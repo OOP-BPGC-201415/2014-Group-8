@@ -12,7 +12,7 @@ package bits.ewallet.enums;
 public enum ClientType {
 
 	EMPLOYEE("employee"),
-	MARKET("market"),
+	MERCHANT("merchant"),
 	ADMIN("admin");
 	;
 
