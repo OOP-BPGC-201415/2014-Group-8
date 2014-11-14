@@ -41,6 +41,9 @@ public class Account implements Serializable {
 	@JoinColumn(name = "client_id", insertable = true, updatable = true)
 	private Client client;
 
+//	@OneToMany(fetch = FetchType.LAZY)
+//	@
+
 	public Long getId() {
 		return id;
 	}
@@ -81,7 +84,7 @@ public class Account implements Serializable {
 		this.client = client;
 	}
 
-	
+
 
 	@Override
 	public int hashCode() {
