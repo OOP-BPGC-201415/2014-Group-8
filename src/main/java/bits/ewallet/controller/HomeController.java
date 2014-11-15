@@ -19,7 +19,6 @@ public class HomeController {
 	@RequestMapping
 	public String home()
 	{
-		System.out.println("home called");
 		return "home";
 	}
 

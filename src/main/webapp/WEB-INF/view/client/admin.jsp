@@ -13,5 +13,6 @@
     </head>
     <body>
         <h1>Hello .. Logged in as admin!!</h1>
+	<p>There are currently ${totalClients} users</p>
     </body>
 </html>
