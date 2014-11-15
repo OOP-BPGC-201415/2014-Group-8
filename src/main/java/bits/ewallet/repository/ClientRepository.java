@@ -6,6 +6,8 @@
 package bits.ewallet.repository;
 
 import bits.ewallet.entity.Client;
+import bits.ewallet.enums.ClientType;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -14,6 +16,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface ClientRepository extends JpaRepository<Client,Long>{
 
-//	public List<Client> findByClientType(ClientType clientType);
+	public List<Client> findByType(ClientType clientType);
 
 }

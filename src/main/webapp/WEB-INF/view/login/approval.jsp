@@ -1,10 +1,11 @@
 <%-- 
-    Document   : loginPage
-    Created on : 14 Nov, 2014, 10:31:17 PM
+    Document   : approval
+    Created on : 15 Nov, 2014, 7:12:31 PM
     Author     : amit
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<jsp:include page="../header.jsp"/>
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,6 +13,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello Logged In</h1>
+        <h1>${username} submitted for approval</h1>
     </body>
 </html>

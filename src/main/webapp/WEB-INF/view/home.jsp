@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<jsp:include page="header.jsp"/>
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,5 +15,6 @@
     </head>
     <body>
         <h1>Hello World!</h1>
+	<c:redirect url="/signup"/>
     </body>
 </html>
