@@ -23,9 +23,9 @@ public class ClientRepositoryTest extends TestCase{
 		ApplicationContext context = sl.getJpaContext();
 		ClientRepository cr = context.getBean(ClientRepository.class);
 		int size = cr.findAll().size();
-		c.setUserName("test user");
+		c.setUsername("test user");
 		assertEquals(cr.saveAndFlush(c), c);
-		assertEquals(cr.findOne(c.getId()).getUserName(), "test user");
+		assertEquals(cr.findOne(c.getId()).getUsername(), "test user");
 		cr.delete(c);
 		assertEquals(cr.findAll().size(), size);
 

@@ -15,11 +15,11 @@ public class ClientTest extends TestCase{
 
 	Client c = new Client();
 	public void testClient(){
-		c.setUserName("test");
+		c.setUsername("test");
 		c.setUniquePin("1234");
 		c.setPassword("passwd");
 
-		assertEquals(c.getUserName(), "test");
+		assertEquals(c.getUsername(), "test");
 		assertEquals(c.getUniquePin(), "1234");
 		assertEquals(c.getPassword(), "passwd");
 		assertEquals(c.getChangeDate(), null);
