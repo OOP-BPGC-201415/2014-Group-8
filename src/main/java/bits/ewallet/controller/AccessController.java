@@ -54,7 +54,7 @@ public class AccessController {
 	{
 		clientRepository.save(client);
 		ModelAndView mav = new ModelAndView("/login/approval");
-		mav.addObject("username", client.getUserName());
+		mav.addObject("username", client.getUsername());
 		return mav;
 
 	}
