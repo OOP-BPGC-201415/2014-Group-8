@@ -5,8 +5,11 @@
  */
 package bits.ewallet.controller;
 
+import bits.ewallet.entity.Account;
 import bits.ewallet.entity.Client;
 import bits.ewallet.repository.ClientRepository;
+import java.util.ArrayList;
+import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,6 +47,8 @@ public class AccessController {
 	{
 		ModelAndView mav = new ModelAndView("/login/signup");
 		Client client = new Client();
+		List<Account> accounts = new ArrayList<Account>();
+		client.setAccounts(accounts);
 		mav.addObject("client", client);
 		return mav;
 

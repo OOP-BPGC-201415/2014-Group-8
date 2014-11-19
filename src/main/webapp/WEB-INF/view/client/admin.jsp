@@ -20,7 +20,7 @@
 	    <tr>
 		<th>User Name</th>
 		<th>User Accounts</th>
-		<th>Add account</th>
+		<th>Add accounts</th>
 	    </tr>
 	    <tbody>
 		<c:forEach items="${clients}" var="client">
@@ -28,14 +28,31 @@
 			<td><c:out value="${client.username}"/></td>
 			<td><c:out value="${client.accounts.size()}"/></td>
 			<td>
-			    <a href="#myModal">
-				<span class="glyphicon glyphicon-plus"></span>
-			    </a>
+			    <form accept-charset="UTF-8" role="form" method="GET" action="<c:url value="/client/${client.id}/account"/>">
+				<button type="submit" value="Add Account" class="btn btn-primary btn-lg">
+				    <span class="glyphicon glyphicon-plus"></span>  Add Account
+				</button>
+			    </form>
 			</td>
 		    </tr>
 		</c:forEach>
 	    </tbody>
 	</table>
-
+	<div class="modal fade" id="accountmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	    <div class="modal-dialog">
+		<div class="modal-content">
+		    <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+			<h4 class="modal-title" id="myModalLabel">Modal New</h4>
+		    </div>
+		    <div class="modal-body">
+		    </div>
+		    <div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			<button type="button" class="btn btn-primary">Save changes</button>
+		    </div>
+		</div>
+	    </div>
+	</div>
     </body>
 </html>

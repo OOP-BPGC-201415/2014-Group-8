@@ -13,7 +13,16 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello dashboard</h1>
-	<p>currently viewing ${client.username} user</p>
+	<div class="row">
+	    <div class="col-md-1"></div>
+	    <div class="col-md-4">
+		<h1>Welcome ${client.username}</h1>
+		<h2>Active accounts: ${client.accounts.size()}</h2>
+	    </div>
+	    <div class="col-md-2"></div>
+	    <div class="col-md-4">
+		<h1>Total Balance: Rs ${balance}/-</h1>
+	    </div>
+	</div>	
     </body>
 </html>

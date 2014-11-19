@@ -9,6 +9,7 @@ import bits.ewallet.entity.Client;
 import bits.ewallet.repository.AccountRepository;
 import bits.ewallet.repository.ClientRepository;
 import bits.ewallet.repository.TransactionRecordRepository;
+import bits.ewallet.service.ClientService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,6 +36,9 @@ public class ClientController {
 	@Autowired
 	private TransactionRecordRepository transactionRecordRepository;
 
+	@Autowired
+	private ClientService clientService;
+
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public ModelAndView adminList(){
 		ModelAndView mav = new ModelAndView("client/admin");
@@ -45,11 +49,24 @@ public class ClientController {
 		return mav;
 	}
 
-	@RequestMapping( value = "/dashboard/{id}", method = RequestMethod.GET)
+	@RequestMapping( value = "/{id}/dashboard", method = RequestMethod.GET)
 	public @ResponseBody ModelAndView clientDashboard( @PathVariable("id") Client client){
 
 		ModelAndView mav = new ModelAndView("client/dashboard");
+		double balance = clientService.getTotalBalance(client);
 		mav.addObject("client", client);
+		mav.addObject("balance", balance);
+		return mav;
+	}
+
+	@RequestMapping(value = "/{id}/account", method = RequestMethod.GET)
+	public @ResponseBody ModelAndView assignAccount(@PathVariable("id") Client client){
+		ModelAndView mav = new ModelAndView("client/admin");
+		clientService.addAccount(client);
+		List clients = clientRepository.findAll();
+		int totalClients = clients.size();
+		mav.addObject("clients",clients);
+		mav.addObject("totalClients",totalClients);
 		return mav;
 	}
 
