@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -40,33 +41,47 @@ public class ClientController {
 	private ClientService clientService;
 
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
-	public ModelAndView adminList(){
+	public ModelAndView adminList() {
 		ModelAndView mav = new ModelAndView("client/admin");
 		List clients = clientRepository.findAll();
 		int totalClients = clients.size();
-		mav.addObject("clients",clients);
-		mav.addObject("totalClients",totalClients);
+		mav.addObject("clients", clients);
+		mav.addObject("totalClients", totalClients);
 		return mav;
 	}
 
-	@RequestMapping( value = "/{id}/dashboard", method = RequestMethod.GET)
-	public @ResponseBody ModelAndView clientDashboard( @PathVariable("id") Client client){
-
+	@RequestMapping(value = "/dashboard", method = RequestMethod.POST)
+	public ModelAndView dashboard(@RequestParam String username, @RequestParam String password) {
 		ModelAndView mav = new ModelAndView("client/dashboard");
-		double balance = clientService.getTotalBalance(client);
-		mav.addObject("client", client);
-		mav.addObject("balance", balance);
+		List<Client> clients = clientRepository.findByUsername(username);
+		if (clients.get(0).getPassword().equals(password)) {
+			double balance = clientService.getTotalBalance(clients.get(0));
+			mav.addObject("client", clients.get(0));
+			mav.addObject("balance", balance);
+		}
 		return mav;
 	}
+
+//	@RequestMapping(value = "/{id}/dashboard", method = RequestMethod.GET)
+//	public @ResponseBody
+//	ModelAndView clientDashboard(@PathVariable("id") Client client) {
+//
+//		ModelAndView mav = new ModelAndView("client/dashboard");
+//		double balance = clientService.getTotalBalance(client);
+//		mav.addObject("client", client);
+//		mav.addObject("balance", balance);
+//		return mav;
+//	}
 
 	@RequestMapping(value = "/{id}/account", method = RequestMethod.GET)
-	public @ResponseBody ModelAndView assignAccount(@PathVariable("id") Client client){
+	public @ResponseBody
+	ModelAndView assignAccount(@PathVariable("id") Client client) {
 		ModelAndView mav = new ModelAndView("client/admin");
 		clientService.addAccount(client);
 		List clients = clientRepository.findAll();
 		int totalClients = clients.size();
-		mav.addObject("clients",clients);
-		mav.addObject("totalClients",totalClients);
+		mav.addObject("clients", clients);
+		mav.addObject("totalClients", totalClients);
 		return mav;
 	}
 
@@ -83,5 +98,4 @@ public class ClientController {
 ////		mav.addObject(clientRepository.findOne(merchant.getId()));
 //		return mav;
 //	}
-
 }

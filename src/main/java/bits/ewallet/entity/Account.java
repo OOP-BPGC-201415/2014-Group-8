@@ -6,6 +6,8 @@
 package bits.ewallet.entity;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,7 +16,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.eclipse.persistence.annotations.ReturnInsert;
 
 /**
  *
@@ -24,9 +28,17 @@ import javax.persistence.Table;
 @Table(name = "account")
 public class Account implements Serializable {
 	private static final long serialVersionUID = 1L;
+
+	public static final String prefix = "ACC";
+
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+
+	@Column(name = "acc_seq",columnDefinition="serial")
+	@Basic
+	@ReturnInsert(returnOnly = true)
+	private Long accSeq;
 
 	@Column(name = "account_number")
 	private String accountNumber;
@@ -41,8 +53,12 @@ public class Account implements Serializable {
 	@JoinColumn(name = "client_id", insertable = true, updatable = true)
 	private Client client;
 
-//	@OneToMany(fetch = FetchType.LAZY)
-//	@
+	@OneToMany( mappedBy = "toAccount", orphanRemoval = true)
+	private List<TransactionRecord> toTransactions;
+
+	@OneToMany( mappedBy = "fromAccount", orphanRemoval = true)
+	private List<TransactionRecord> fromTransactions;
+
 
 	public Long getId() {
 		return id;
@@ -54,6 +70,14 @@ public class Account implements Serializable {
 
 	public String getAccountNumber() {
 		return accountNumber;
+	}
+
+	public Long getAccSeq() {
+		return accSeq;
+	}
+
+	public void setAccSeq(Long accSeq) {
+		this.accSeq = accSeq;
 	}
 
 	public void setAccountNumber(String accountNumber) {
@@ -83,6 +107,32 @@ public class Account implements Serializable {
 	public void setClient(Client client) {
 		this.client = client;
 	}
+
+	public List<TransactionRecord> getToTransactions() {
+		return toTransactions;
+	}
+
+	public void setToTransactions(List<TransactionRecord> toTransactions) {
+		this.toTransactions = toTransactions;
+	}
+
+	public void addToTransaction(TransactionRecord tr){
+		this.toTransactions.add(tr);
+	}
+
+	public List<TransactionRecord> getFromTransactions() {
+		return fromTransactions;
+	}
+
+	public void setFromTransactions(List<TransactionRecord> fromTransactions) {
+		this.fromTransactions = fromTransactions;
+	}
+
+	public void addFromTransaction(TransactionRecord tr){
+		this.fromTransactions.add(tr);
+	}
+
+
 
 
 
