@@ -105,7 +105,11 @@ public class Client implements Serializable {
 	public void setAccounts(List<Account> accounts) {
 		this.accounts = accounts;
 	}
-	
+
+	public void addAccount(Account account){
+		this.accounts.add(account);
+	}
+
 
 
 

@@ -22,7 +22,7 @@
 		<form accept-charset="UTF-8" name="client" role="form" method="POST" action="<c:url value="/approval"/>">
 		    <fieldset>
 			<div class="form-group">
-			    <input class="form-control" placeholder="Username" name="userName" type="text" autofocus="true" autocomplete="true" value="${client.username}">
+			    <input class="form-control" placeholder="Username" name="username" type="text" autofocus="true" autocomplete="true" value="${client.username}">
 			</div>
 			<div class="form-group">
 			    <input class="form-control" placeholder="Password" name="password" type="password" value="${client.password}">
