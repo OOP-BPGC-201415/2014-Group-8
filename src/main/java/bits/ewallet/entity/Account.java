@@ -6,6 +6,7 @@
 package bits.ewallet.entity;
 
 import java.io.Serializable;
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import org.eclipse.persistence.annotations.ReturnInsert;
 
 /**
  *
@@ -24,9 +26,17 @@ import javax.persistence.Table;
 @Table(name = "account")
 public class Account implements Serializable {
 	private static final long serialVersionUID = 1L;
+
+	public static final String prefix = "ACC";
+
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+
+	@Column(name = "acc_seq",columnDefinition="serial")
+	@Basic
+	@ReturnInsert(returnOnly = true)
+	private Long accSeq;
 
 	@Column(name = "account_number")
 	private String accountNumber;
@@ -54,6 +64,14 @@ public class Account implements Serializable {
 
 	public String getAccountNumber() {
 		return accountNumber;
+	}
+
+	public Long getAccSeq() {
+		return accSeq;
+	}
+
+	public void setAccSeq(Long accSeq) {
+		this.accSeq = accSeq;
 	}
 
 	public void setAccountNumber(String accountNumber) {

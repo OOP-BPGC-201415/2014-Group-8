@@ -27,6 +27,24 @@
 			<div class="form-group">
 			    <input class="form-control" placeholder="Password" name="password" type="password" value="${client.password}">
 			</div>
+
+			<div class="form-group">
+			    <label class="col-lg-3 control-label">Client Type</label>
+			    <div class="col-lg-10">
+				<div class="radio">
+				    <label>
+					<input name="type" id="client" value="${client.type}" checked="" type="radio">
+					Client
+				    </label>
+				</div>
+				<div class="radio">
+				    <label>
+					<input name="type" id="merchant" value="${client.type}" type="radio">
+					Merchant
+				    </label>
+				</div>
+			    </div>
+			</div>
 			<input class="btn btn-lg btn-primary btn-block" type="submit" value="Signup">
 		    </fieldset>
 		</form>

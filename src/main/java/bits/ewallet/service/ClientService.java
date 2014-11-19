@@ -21,8 +21,12 @@ public class ClientService {
 
 	@Autowired
 	private AccountRepository accountRepository;
+
 	@Autowired
 	private ClientRepository clientRepository;
+
+	@Autowired
+	private AccountService accountService;
 
 	public Client addAccount(Client client){
 		Account a = new Account();
@@ -30,6 +34,7 @@ public class ClientService {
 		a.setBalance(0.0);
 		a.setClient(client);
 		client.addAccount(a);
+		a.setAccountNumber(accountService.getAccountNumber());
 		accountRepository.saveAndFlush(a);
 		clientRepository.saveAndFlush(client);
 		return client;
