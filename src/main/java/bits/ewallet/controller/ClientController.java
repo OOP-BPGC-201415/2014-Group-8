@@ -59,10 +59,6 @@ public class ClientController {
 			mav.addObject("client", clients.get(0));
 			mav.addObject("balance", balance);
 		}
-//		else{
-//			mav.addObject("client", "incorrect login credentials");
-//			mav.addObject("balance", "Relogin using correct details");
-//		}
 		return mav;
 	}
 

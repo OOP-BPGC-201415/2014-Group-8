@@ -6,6 +6,7 @@
 package bits.ewallet.entity;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.eclipse.persistence.annotations.ReturnInsert;
 
@@ -51,8 +53,12 @@ public class Account implements Serializable {
 	@JoinColumn(name = "client_id", insertable = true, updatable = true)
 	private Client client;
 
-//	@OneToMany(fetch = FetchType.LAZY)
-//	@
+	@OneToMany( mappedBy = "toAccount", orphanRemoval = true)
+	private List<TransactionRecord> toTransactions;
+
+	@OneToMany( mappedBy = "fromAccount", orphanRemoval = true)
+	private List<TransactionRecord> fromTransactions;
+
 
 	public Long getId() {
 		return id;
@@ -101,6 +107,32 @@ public class Account implements Serializable {
 	public void setClient(Client client) {
 		this.client = client;
 	}
+
+	public List<TransactionRecord> getToTransactions() {
+		return toTransactions;
+	}
+
+	public void setToTransactions(List<TransactionRecord> toTransactions) {
+		this.toTransactions = toTransactions;
+	}
+
+	public void addToTransaction(TransactionRecord tr){
+		this.toTransactions.add(tr);
+	}
+
+	public List<TransactionRecord> getFromTransactions() {
+		return fromTransactions;
+	}
+
+	public void setFromTransactions(List<TransactionRecord> fromTransactions) {
+		this.fromTransactions = fromTransactions;
+	}
+
+	public void addFromTransaction(TransactionRecord tr){
+		this.fromTransactions.add(tr);
+	}
+
+
 
 
 
