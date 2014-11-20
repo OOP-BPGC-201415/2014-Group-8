@@ -46,7 +46,6 @@ public class AccountController {
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public @ResponseBody List<Account> searchAccounts(@RequestParam ("accountNumber") String query){
 
-//		ModelAndView mav = new ModelAndView("/account/details");
 		List<Account> accounts = accountRepository.findByAccountNumberContainingIgnoreCase(query, null);
 		return accounts;
 	}

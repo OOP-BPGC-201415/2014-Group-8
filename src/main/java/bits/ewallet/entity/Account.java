@@ -5,6 +5,7 @@
  */
 package bits.ewallet.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -53,9 +54,11 @@ public class Account implements Serializable {
 	@JoinColumn(name = "client_id", insertable = true, updatable = true)
 	private Client client;
 
+	@JsonIgnore
 	@OneToMany( mappedBy = "toAccount", orphanRemoval = true)
 	private List<TransactionRecord> toTransactions;
 
+	@JsonIgnore
 	@OneToMany( mappedBy = "fromAccount", orphanRemoval = true)
 	private List<TransactionRecord> fromTransactions;
 
