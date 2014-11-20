@@ -44,10 +44,13 @@ public class AccountController {
 	}
 
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public @ResponseBody List<Account> searchAccounts(@RequestParam ("accountNumber") String query){
+	public @ResponseBody ModelAndView searchAccounts(@RequestParam ("accountNumber") String query, @RequestParam("accountId") Account account){
 
+		ModelAndView mav = new ModelAndView("/account/transaction");
 		List<Account> accounts = accountRepository.findByAccountNumberContainingIgnoreCase(query, null);
-		return accounts;
+		mav.addObject("accounts", accounts);
+		mav.addObject("account", account);
+		return mav;
 	}
 
 }
