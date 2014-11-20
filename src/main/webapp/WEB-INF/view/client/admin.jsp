@@ -38,6 +38,25 @@
 		</c:forEach>
 	    </tbody>
 	</table>
+
+	<div class="row">
+	    <div class="col-md-2"></div>
+	    <div class="col-md-6">
+		<div class="list-group">
+		    <c:forEach items="${clients}" var="client">
+			<h3 class="list-group-item-heading">User : <b>${client.username}</b></h3>
+			<h4 class="list-group-item-heading">Total Accounts : <b>${client.accounts.size()}</b></h4>
+			<form accept-charset="UTF-8" role="form" method="GET" action="<c:url value="/client/${client.id}/dashboard"/>">
+			    <button type="submit" value="Add Account" class="btn btn-primary btn-xs">
+				<span class="glyphicon glyphicon-eye-close"></span> View Details
+			    </button>
+			</form>
+			<br>
+		    </c:forEach>
+		</div>
+	    </div>
+	</div>
+
 	<div class="modal fade" id="accountmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	    <div class="modal-dialog">
 		<div class="modal-content">
