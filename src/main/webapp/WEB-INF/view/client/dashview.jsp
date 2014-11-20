@@ -50,7 +50,7 @@
 				<td><c:out value="${account.toTransactions.size()}"/></td>
 				<td><c:out value="${account.fromTransactions.size()}"/></td>
 				<td>
-				    <button type="button" value="view" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal">
+				    <button type="button" value="view" class="btn btn-primary btn-sm" data-toggle="modal" data-id="${account.accountNumber}" data-target="#modal">
 					<span class="glyphicon glyphicon-plus-sign"></span>  Add Balance
 				    </button>
 				</td>
@@ -65,21 +65,22 @@
 		</table>
 	    </div>
 	</div>
-
-	<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modal">
-	    Launch demo modal
-	</button>
     </body>
 </html>
+
+
 <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="#myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
 	<div class="modal-content">
 	    <div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-		<h4 class="modal-title" id="myModalLabel">Enter Amount to add to ${client.username}</h4>
+		<h4 class="modal-title" id="myModalLabel">Enter Amount to add to ${account.accountNumber}</h4>
 	    </div>
 	    <div class="modal-body">
-		
+		<label>Enter Amount(Rs.)</label>
+		<form>
+		    <input class="form-control" placeholder="Amount" name="balance" type="text" autofocus="true" autocomplete="true" value="">
+		</form>
 	    </div>
 	    <div class="modal-footer">
 		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
