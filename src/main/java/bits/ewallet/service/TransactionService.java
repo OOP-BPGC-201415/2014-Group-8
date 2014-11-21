@@ -25,6 +25,17 @@ public class TransactionService {
 	@Autowired
 	private AccountService accountService;
 
+	public TransactionRecord saveTransaction(Account toAccount, double amount){
+
+		accountService.addBalanceAmount(toAccount, amount);
+		TransactionRecord tr = new TransactionRecord();
+		tr.setToAccount(toAccount);
+		tr.setAmount(amount);
+		tr.setTransactionDate(new Date(new java.util.Date().getTime()));
+		transactionRecordRepository.saveAndFlush(tr);
+		return tr;
+	}
+
 	public TransactionRecord saveTransaction(Account fromAccount, Account toAccount, double amount){
 
 		accountService.addBalanceAmount(toAccount, amount);

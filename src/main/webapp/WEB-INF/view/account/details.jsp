@@ -27,7 +27,7 @@
 	<div class="row">
 	    <div class="col-md-4"></div>
 	    <div class="col-md-4">
-		<div class="panel panel-default">
+		<div class="panel panel-primary">
 		    <div class="panel-heading">
 			<h3 class="panel-title">Account Details</h3>
 		    </div>
@@ -43,23 +43,23 @@
 	<br>
 	<br>
 
-	<div class="row">
-	    <div class="col-md-4"></div>
-	    <div class="col-md-4">
-		<form accept-charset="UTF-8" role="form" method="GET" action="<c:url value="/account/search"/>">
-		    <div class="input-group">
-			<input class="form-control" placeholder="Account Number" name="accountNumber" type="text" autofocus="true" autocomplete="true" value="${accountNumber}"/>
-			<input class="form-control" name="accountId" type="hidden" value="${account.id}">
-			<span class="input-group-btn">
-			    <button class="btn btn-primary">
-				<span class="fa fa-search fa-fw fa-lg"></span>
-				Make Transaction
-			    </button>
-			</span>
+	<!--	<div class="row">
+		    <div class="col-md-4"></div>
+		    <div class="col-md-4">
+			<form accept-charset="UTF-8" role="form" method="GET" action="<c:url value="/account/search"/>">
+			    <div class="input-group">
+				<input class="form-control" placeholder="Account Number" name="accountNumber" type="text" autofocus="true" autocomplete="true" value="${accountNumber}"/>
+				<input class="form-control" name="accountId" type="hidden" value="${account.id}">
+				<span class="input-group-btn">
+				    <button class="btn btn-primary">
+					<span class="fa fa-search fa-fw fa-lg"></span>
+					Make Transaction
+				    </button>
+				</span>
+			    </div>
+			</form>
 		    </div>
-		</form>
-	    </div>
-	</div>
+		</div>-->
 
 	<br>
 	<br>
@@ -71,6 +71,33 @@
 	<div class="row">
 	    <div class="col-md-1"></div>
 	    <div class="col-md-5">
+		<div class="panel panel-default">
+		    <div class="panel-heading">
+			<h3 class="panel-title">Credit From Account</h3>
+		    </div>
+		    <div class="panel-body">
+			<form accept-charset="UTF-8" role="form" method="GET" action="<c:url value="/account/search"/>">
+			    <div class="input-group">
+				<input class="form-control" placeholder="Account Number" name="accountNumber" type="text" autofocus="true" autocomplete="true" value="${accountNumber}"/>
+				<br>
+				<input class="form-control" name="accountId" type="hidden" value="${account.id}">
+				<br>
+				<input class="form-control" name="amount" type="text" placeholder="Amount">
+				<br>
+				<br>
+				<input class="form-control" name="pin" type="password" placeholder="Secret Pin">
+				<br>
+				<br>
+				<input class="btn btn-success btn-block" type="submit" value="Make Transaction">
+			    </div>
+			</form>
+		    </div>
+		</div>
+
+		<br>
+		<br>
+		<br>
+
 		<div class="panel panel-success">
 		    <div class="panel-heading">
 			<h3 class="panel-title">Debit Transactions</h3>
@@ -96,6 +123,29 @@
 		</div>
 	    </div>
 	    <div class="col-md-5">
+		<div class="panel panel-default">
+		    <div class="panel-heading">
+			<h3 class="panel-title">Debit To Account</h3>
+		    </div>
+		    <div class="panel-body">
+			<form accept-charset="UTF-8" role="form" method="GET" action="<c:url value="/account/search"/>">
+			    <div class="input-group">
+				<input class="form-control" placeholder="Account Number" name="accountNumber" type="text" autofocus="true" autocomplete="true" value="${accountNumber}"/>
+				<br>
+				<input class="form-control" name="accountId" type="hidden" value="${account.id}">
+				<br>
+				<input class="form-control" name="amount" type="text" placeholder="Amount">
+				<br>
+				<br>
+				<input class="btn btn-danger btn-block" type="submit" value="Make Transaction">
+			    </div>
+			</form>
+		    </div>
+		</div>
+
+		<br>
+		<br>
+		<br>
 		<div class="panel panel-danger">
 		    <div class="panel-heading">
 			<h3 class="panel-title">Credit Transactions</h3>
