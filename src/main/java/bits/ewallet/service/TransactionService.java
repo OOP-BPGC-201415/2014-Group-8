@@ -7,6 +7,7 @@ package bits.ewallet.service;
 
 import bits.ewallet.entity.Account;
 import bits.ewallet.entity.TransactionRecord;
+import bits.ewallet.repository.AccountRepository;
 import bits.ewallet.repository.TransactionRecordRepository;
 import java.sql.Date;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class TransactionService {
+
+	@Autowired
+	private AccountRepository accountRepository;
 
 	@Autowired
 	private TransactionRecordRepository transactionRecordRepository;
@@ -54,13 +58,44 @@ public class TransactionService {
 	public TransactionRecord saveTransaction(Account fromAccount, Account toAccount, double amount, String pin) {
 
 		TransactionRecord tr = new TransactionRecord();
+		tr.setFromAccount(fromAccount);
+		tr.setToAccount(toAccount);
+		tr.setTransactionDate(new Date(new java.util.Date().getTime()));
+
 		if (accountService.checkBalance(fromAccount, amount)) {
-			tr.setFromAccount(fromAccount);
-			tr.setToAccount(toAccount);
 			tr.setAmount(amount);
-			tr.setTransactionDate(new Date(new java.util.Date().getTime()));
-			transactionRecordRepository.saveAndFlush(tr);
+			if (fromAccount.getUniqueId() != null) {
+				if (!fromAccount.getUniqueId().equals(pin)) {
+					return tr;
+				} else {
+					accountService.addBalanceAmount(toAccount, amount);
+					accountService.addBalanceAmount(fromAccount, -amount);
+					transactionRecordRepository.saveAndFlush(tr);
+					return tr;
+				}
+			} else {
+				accountService.addBalanceAmount(toAccount, amount);
+				accountService.addBalanceAmount(fromAccount, -amount);
+				transactionRecordRepository.saveAndFlush(tr);
+				return tr;
+			}
+		} else {
+			return tr;
 		}
-		return tr;
+
+//		if (fromAccount.getUniqueId() != null) {
+//			if (!fromAccount.getUniqueId().equals(pin)) {
+//				return tr;
+//			} else if (accountService.checkBalance(fromAccount, amount)) {
+//				accountService.addBalanceAmount(toAccount, amount);
+//				accountService.addBalanceAmount(fromAccount, -amount);
+//				transactionRecordRepository.saveAndFlush(tr);
+//			}
+//		} else if (accountService.checkBalance(fromAccount, amount)) {
+//			accountService.addBalanceAmount(toAccount, amount);
+//			accountService.addBalanceAmount(fromAccount, -amount);
+//			transactionRecordRepository.saveAndFlush(tr);
+//		}
+//		return tr;
 	}
 }

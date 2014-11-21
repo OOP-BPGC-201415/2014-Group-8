@@ -55,8 +55,9 @@ public class TransactionController {
 	@RequestMapping(value = "/debit", method = RequestMethod.GET)
 	public ModelAndView debitTransaction(@RequestParam("balance") Double balance, @RequestParam("pin") String pin, @RequestParam("account") Account account, @RequestParam("acc") Account acc) {
 
+		System.out.println("this called");
 		ModelAndView mav = new ModelAndView("transaction/success");
-		TransactionRecord tr = transactionService.saveTransaction(account, acc, balance, pin);
+		TransactionRecord tr = transactionService.saveTransaction(acc, account, balance, pin);
 		mav.addObject("transaction", tr);
 		return mav;
 	}
