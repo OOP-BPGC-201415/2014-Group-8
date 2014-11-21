@@ -25,6 +25,15 @@ public class AccountService {
 		accountRepository.saveAndFlush(account);
 	}
 
+	public boolean checkBalance(Account account, double amount){
+
+		if(account.getBalance() >= amount){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
 	public String getAccountNumber(){
 		long accNum;
 		String prefix = Account.prefix;

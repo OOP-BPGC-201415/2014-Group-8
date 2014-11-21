@@ -17,7 +17,7 @@
 	<div class="row">
 	    <div class="col-md-4"></div>
 	    <div class="col-md-4">
-		<h1 class="page-header">Account Summary and Transactions</h1>
+		<h1 class="page-header">Account Transactions</h1>
 	    </div>
 	</div>
 
@@ -143,6 +143,8 @@
 		    </div>
 		</div>
 
+		<br>
+		<br>
 		<br>
 		<br>
 		<br>

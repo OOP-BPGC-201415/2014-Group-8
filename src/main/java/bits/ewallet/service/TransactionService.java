@@ -25,7 +25,7 @@ public class TransactionService {
 	@Autowired
 	private AccountService accountService;
 
-	public TransactionRecord saveTransaction(Account toAccount, double amount){
+	public TransactionRecord saveTransaction(Account toAccount, double amount) {
 
 		accountService.addBalanceAmount(toAccount, amount);
 		TransactionRecord tr = new TransactionRecord();
@@ -36,27 +36,31 @@ public class TransactionService {
 		return tr;
 	}
 
-	public TransactionRecord saveTransaction(Account fromAccount, Account toAccount, double amount){
+	public TransactionRecord saveTransaction(Account fromAccount, Account toAccount, double amount) {
 
-		accountService.addBalanceAmount(toAccount, amount);
-		accountService.addBalanceAmount(fromAccount, -amount);
 		TransactionRecord tr = new TransactionRecord();
-		tr.setFromAccount(fromAccount);
-		tr.setToAccount(toAccount);
-		tr.setAmount(amount);
-		tr.setTransactionDate(new Date(new java.util.Date().getTime()));
-		transactionRecordRepository.saveAndFlush(tr);
+		if (accountService.checkBalance(fromAccount, amount)) {
+			accountService.addBalanceAmount(toAccount, amount);
+			accountService.addBalanceAmount(fromAccount, -amount);
+			tr.setFromAccount(fromAccount);
+			tr.setToAccount(toAccount);
+			tr.setAmount(amount);
+			tr.setTransactionDate(new Date(new java.util.Date().getTime()));
+			transactionRecordRepository.saveAndFlush(tr);
+		}
 		return tr;
 	}
 
-	public TransactionRecord saveTransaction(Account fromAccount, Account toAccount, double amount, String pin){
+	public TransactionRecord saveTransaction(Account fromAccount, Account toAccount, double amount, String pin) {
 
 		TransactionRecord tr = new TransactionRecord();
-		tr.setFromAccount(fromAccount);
-		tr.setToAccount(toAccount);
-		tr.setAmount(amount);
-		tr.setTransactionDate(new Date(new java.util.Date().getTime()));
-		transactionRecordRepository.saveAndFlush(tr);
+		if (accountService.checkBalance(fromAccount, amount)) {
+			tr.setFromAccount(fromAccount);
+			tr.setToAccount(toAccount);
+			tr.setAmount(amount);
+			tr.setTransactionDate(new Date(new java.util.Date().getTime()));
+			transactionRecordRepository.saveAndFlush(tr);
+		}
 		return tr;
 	}
 }
