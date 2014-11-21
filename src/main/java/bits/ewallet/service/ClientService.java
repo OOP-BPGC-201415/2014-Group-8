@@ -42,7 +42,7 @@ public class ClientService {
 
 	public double getTotalBalance(Client client){
 		double balance = 0;
-		for(Account a : client.getAccounts()){
+		for(Account a : client.getAccounts()){	
 			balance += a.getBalance();
 		}
 		return balance;

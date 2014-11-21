@@ -9,11 +9,14 @@ import bits.ewallet.entity.Account;
 import bits.ewallet.repository.AccountRepository;
 import bits.ewallet.repository.ClientRepository;
 import bits.ewallet.repository.TransactionRecordRepository;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -37,6 +40,16 @@ public class AccountController {
 	public ModelAndView accountDetails(@PathVariable("id") Account account){
 		ModelAndView mav = new ModelAndView("/account/details");
 		mav.addObject("account",account);
+		return mav;
+	}
+
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	public @ResponseBody ModelAndView searchAccounts(@RequestParam ("accountNumber") String query, @RequestParam("accountId") Account account){
+
+		ModelAndView mav = new ModelAndView("/account/transaction");
+		List<Account> accounts = accountRepository.findByAccountNumberContainingIgnoreCase(query, null);
+		mav.addObject("accounts", accounts);
+		mav.addObject("account", account);
 		return mav;
 	}
 

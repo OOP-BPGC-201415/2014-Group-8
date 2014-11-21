@@ -6,6 +6,7 @@
 package bits.ewallet.entity;
 
 import bits.ewallet.enums.ClientType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
@@ -47,6 +48,7 @@ public class Client implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private ClientType type;
 
+	@JsonIgnore
 	@OneToMany( mappedBy = "client", orphanRemoval = true)
 	private List<Account> accounts;
 

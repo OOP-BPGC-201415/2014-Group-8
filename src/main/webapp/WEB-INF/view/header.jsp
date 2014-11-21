@@ -13,12 +13,9 @@
 	<!-- jQuery Google's CDN -->
 	<script type="text/javascript" src="<c:url value="/resources/js/jquery-1.11.0.min.js"/>"></script>
 
-	<!-- Bootstrap JS -->
-	<script type="text/javascript" src="<c:url value="/resources/js/bootstrap-3.1.1.min.js"/>"></script>
-
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-
+	
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 
@@ -27,11 +24,7 @@
 
 	<!-- Optional theme -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-
-	<!-- Cerulean Bootswatch Theme CSS -->
-<!--	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/bootswatch-cerulean-bootstrap-3.1.1.min.css"/>"/>-->
-	<!-- CSS -->
-<!--	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/bootstrap-3.1.1.min.css"/>"/>-->
+	
         <title>Ewallet Application</title>
     </head>
     <body>

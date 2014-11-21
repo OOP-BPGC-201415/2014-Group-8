@@ -20,6 +20,11 @@ public class AccountService {
 	@Autowired
 	private AccountRepository accountRepository;
 
+	public void addBalanceAmount(Account account, double amount){
+		account.setBalance(account.getBalance()+amount);
+		accountRepository.saveAndFlush(account);
+	}
+
 	public String getAccountNumber(){
 		long accNum;
 		String prefix = Account.prefix;

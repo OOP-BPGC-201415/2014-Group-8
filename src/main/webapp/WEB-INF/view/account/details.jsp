@@ -14,6 +14,25 @@
         <title>Account Details</title>
     </head>
     <body>
-        <h1>Hello Account ${account.accountNumber}</h1>
+        <h1>Account Details For ${account.accountNumber}</h1>
+
+	<div class="row">
+	    <div class="col-md-6">
+		<form accept-charset="UTF-8" role="form" method="GET" action="<c:url value="/account/search"/>">
+		    <div class="input-group">
+			<input class="form-control" placeholder="Account Number" name="accountNumber" type="text" autofocus="true" autocomplete="true" value="${accountNumber}"/>
+			<input class="form-control" name="accountId" type="hidden" value="${account.id}">
+			<span class="input-group-btn">
+			    <button class="btn btn-primary">
+				<span class="fa fa-search fa-fw fa-lg"></span>
+				Search
+			    </button>
+			</span>
+		    </div>
+		</form>
+	    </div>
+	</div>
+
+	<br>
     </body>
 </html>
