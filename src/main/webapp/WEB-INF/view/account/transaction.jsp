@@ -10,12 +10,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-	<script>
-	    function assignAcc() {
-		var otherAcc = $(this).data("otherAcc");
-	    }
-
-	</script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
@@ -39,10 +33,10 @@
 			<h3 class="list-group-item-heading">Account Number : <b>${acc.accountNumber}</b></h3>
 			<h4 class="list-group-item-heading">Client : <b>${acc.client.username}</b></h4>
 			<br>
-			<button type="button" value="view" class="btn btn-success btn-sm" data-toggle="modal" data-otherAcc="${acc}" data-target="#fromModal" onclick="assignAcc()">
+			<button type="button" value="view" class="btn btn-success btn-sm" data-toggle="modal" data-otherAcc="${acc}" data-target="#fromModal">
 			    <span class="glyphicon glyphicon-plus-sign"></span>  Credit From Account
 			</button>
-			<button type="button" value="view" class="btn btn-danger btn-sm" data-toggle="modal" data-otherAcc="${acc}" data-target="#toModal" onclick="assignAcc()">
+			<button type="button" value="view" class="btn btn-danger btn-sm" data-toggle="modal" data-otherAcc="${acc}" data-target="#toModal">
 			    <span class="glyphicon glyphicon-plus-sign"></span>  Debit to Account
 			</button>
 			<br>

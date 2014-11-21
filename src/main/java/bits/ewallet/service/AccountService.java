@@ -20,11 +20,22 @@ public class AccountService {
 	@Autowired
 	private AccountRepository accountRepository;
 
+/**
+ *
+ * @param account account to which amount is to be added
+ * @param amount transfer amount
+ */
 	public void addBalanceAmount(Account account, double amount){
 		account.setBalance(account.getBalance()+amount);
 		accountRepository.saveAndFlush(account);
 	}
 
+/**
+ *
+ * @param account account whose balance needs to be checked (credit account)
+ * @param amount amount to be checked
+ * @return true if balance greater than amount and false if balance less than amount
+ */
 	public boolean checkBalance(Account account, double amount){
 
 		if(account.getBalance() >= amount){
@@ -34,6 +45,10 @@ public class AccountService {
 		}
 	}
 
+/**
+ *
+ * @return string formatted account number corresponding to sequence value
+ */
 	public String getAccountNumber(){
 		long accNum;
 		String prefix = Account.prefix;

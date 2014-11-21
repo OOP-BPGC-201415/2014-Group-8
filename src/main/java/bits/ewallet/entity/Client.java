@@ -51,63 +51,108 @@ public class Client implements Serializable {
 	@JsonIgnore
 	@OneToMany( mappedBy = "client", orphanRemoval = true)
 	private List<Account> accounts;
-
+/**
+ *
+ * @return database generated id (primary key)
+ */
 	public Long getId() {
 		return id;
 	}
-
+/**
+ *
+ * @param id primary key for record in database. Don't use with ORM
+ */
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+/**
+ *
+ * @return username of the client
+ */
 	public String getUsername() {
 		return username;
 	}
-
+/**
+ *
+ * @param username set username for client
+ */
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
+/**
+ *
+ * @return password of the client
+ */
 	public String getPassword() {
 		return password;
 	}
-
+/**
+ *
+ * @param password set password for the client
+ */
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+/**
+ *
+ * @return identification key similar to password
+ */
 	public String getUniquePin() {
 		return uniquePin;
 	}
-
+/**
+ *
+ * @param uniquePin set identification key
+ */
 	public void setUniquePin(String uniquePin) {
 		this.uniquePin = uniquePin;
 	}
-
+/**
+ *
+ * @return get last change date for password
+ */
 	public Date getChangeDate() {
 		return changeDate;
 	}
-
+/**
+ *
+ * @param changeDate set change date of password
+ */
 	public void setChangeDate(Date changeDate) {
 		this.changeDate = changeDate;
 	}
-
+/**
+ *
+ * @return client type enum
+ */
 	public ClientType getType() {
 		return type;
 	}
-
+/**
+ *
+ * @param type set client type
+ */
 	public void setType(ClientType type) {
 		this.type = type;
 	}
-
+/**
+ *
+ * @return all accounts that belong to client
+ */
 	public List<Account> getAccounts() {
 		return accounts;
 	}
-
+/**
+ *
+ * @param accounts set accounts that belong to client
+ */
 	public void setAccounts(List<Account> accounts) {
 		this.accounts = accounts;
 	}
-
+/**
+ *
+ * @param account add account to existing account list
+ */
 	public void addAccount(Account account){
 		this.accounts.add(account);
 	}

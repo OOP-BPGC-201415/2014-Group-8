@@ -29,6 +29,12 @@ public class TransactionService {
 	@Autowired
 	private AccountService accountService;
 
+/**
+ *
+ * @param toAccount debit account to transfer amount to
+ * @param amount transaction amount
+ * @return saved transaction record with database id assigned
+ */
 	public TransactionRecord saveTransaction(Account toAccount, double amount) {
 
 		accountService.addBalanceAmount(toAccount, amount);
@@ -40,6 +46,13 @@ public class TransactionService {
 		return tr;
 	}
 
+/**
+ *
+ * @param fromAccount credit account to transfer money from
+ * @param toAccount debit account to transfer amount to
+ * @param amount transaction amount
+ * @return saved transaction record with database id assigned
+ */
 	public TransactionRecord saveTransaction(Account fromAccount, Account toAccount, double amount) {
 
 		TransactionRecord tr = new TransactionRecord();
@@ -55,6 +68,14 @@ public class TransactionService {
 		return tr;
 	}
 
+/**
+ *
+ * @param fromAccount credit account to transfer money from
+ * @param toAccount debit account to transfer amount to
+ * @param amount transaction amount
+ * @param pin identification key of credit account (fromAccount)
+ * @return saved transaction record with database id assigned
+ */
 	public TransactionRecord saveTransaction(Account fromAccount, Account toAccount, double amount, String pin) {
 
 		TransactionRecord tr = new TransactionRecord();
@@ -82,20 +103,5 @@ public class TransactionService {
 		} else {
 			return tr;
 		}
-
-//		if (fromAccount.getUniqueId() != null) {
-//			if (!fromAccount.getUniqueId().equals(pin)) {
-//				return tr;
-//			} else if (accountService.checkBalance(fromAccount, amount)) {
-//				accountService.addBalanceAmount(toAccount, amount);
-//				accountService.addBalanceAmount(fromAccount, -amount);
-//				transactionRecordRepository.saveAndFlush(tr);
-//			}
-//		} else if (accountService.checkBalance(fromAccount, amount)) {
-//			accountService.addBalanceAmount(toAccount, amount);
-//			accountService.addBalanceAmount(fromAccount, -amount);
-//			transactionRecordRepository.saveAndFlush(tr);
-//		}
-//		return tr;
 	}
 }
