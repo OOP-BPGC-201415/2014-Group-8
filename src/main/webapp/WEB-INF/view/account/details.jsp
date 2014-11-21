@@ -14,10 +14,38 @@
         <title>Account Details</title>
     </head>
     <body>
-        <h1>Account Details For ${account.accountNumber}</h1>
+	<div class="row">
+	    <div class="col-md-4"></div>
+	    <div class="col-md-4">
+		<h1 class="page-header">Account Summary and Transactions</h1>
+	    </div>
+	</div>
+
+	<br>
+	<br>
 
 	<div class="row">
-	    <div class="col-md-6">
+	    <div class="col-md-4"></div>
+	    <div class="col-md-4">
+		<div class="panel panel-default">
+		    <div class="panel-heading">
+			<h3 class="panel-title">Account Details</h3>
+		    </div>
+		    <div class="panel-body">
+			<p>Account Number : ${account.accountNumber}</p>
+			<p>Client Name : ${account.client.username}</p>
+			<p>Current Balance : ${account.balance}</p>
+		    </div>
+		</div>
+	    </div>
+	</div>
+
+	<br>
+	<br>
+
+	<div class="row">
+	    <div class="col-md-4"></div>
+	    <div class="col-md-4">
 		<form accept-charset="UTF-8" role="form" method="GET" action="<c:url value="/account/search"/>">
 		    <div class="input-group">
 			<input class="form-control" placeholder="Account Number" name="accountNumber" type="text" autofocus="true" autocomplete="true" value="${accountNumber}"/>
@@ -25,7 +53,7 @@
 			<span class="input-group-btn">
 			    <button class="btn btn-primary">
 				<span class="fa fa-search fa-fw fa-lg"></span>
-				Search
+				Make Transaction
 			    </button>
 			</span>
 		    </div>
@@ -34,5 +62,65 @@
 	</div>
 
 	<br>
+	<br>
+
+	<br>
+	<br>
+	<br>
+
+	<div class="row">
+	    <div class="col-md-1"></div>
+	    <div class="col-md-5">
+		<div class="panel panel-success">
+		    <div class="panel-heading">
+			<h3 class="panel-title">Debit Transactions</h3>
+		    </div>
+		    <div class="panel-body">
+			<table class="table table-striped table-bordered">
+			    <tr>
+				<th>Account Number</th>
+				<th>Amount</th>
+				<th>Date</th>
+			    </tr>
+			    <tbody>
+				<c:forEach items="${account.toTransactions}" var="transaction">
+				    <tr>
+					<td><c:out value="${transaction.fromAccount.accountNumber}"/></td>
+					<td><c:out value="${transaction.amount}"/></td>
+					<td><c:out value="${transaction.transactionDate}"/></td>
+				    </tr>
+				</c:forEach>
+			    </tbody>
+			</table>
+		    </div>
+		</div>
+	    </div>
+	    <div class="col-md-5">
+		<div class="panel panel-danger">
+		    <div class="panel-heading">
+			<h3 class="panel-title">Credit Transactions</h3>
+		    </div>
+		    <div class="panel-body">
+			<table class="table table-striped table-bordered">
+			    <tr>
+				<th>Account Number</th>
+				<th>Amount</th>
+				<th>Date</th>
+			    </tr>
+			    <tbody>
+				<c:forEach items="${account.fromTransactions}" var="transaction">
+				    <tr>
+					<td><c:out value="${transaction.toAccount.accountNumber}"/></td>
+					<td><c:out value="${transaction.amount}"/></td>
+					<td><c:out value="${transaction.transactionDate}"/></td>
+				    </tr>
+				</c:forEach>
+			    </tbody>
+			</table>
+		    </div>
+		</div>
+	    </div>
+
+	</div>
     </body>
 </html>
