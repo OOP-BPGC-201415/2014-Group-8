@@ -27,35 +27,45 @@
 	    </div>
 	</div>
 
+	<br>
+	<br>
+	<br>
+	<br>
+
 	<div class="row">
 	    <div class="col-md-2"></div>
 	    <div class="col-md-8">
-		<table class="table table-striped table-bordered">
-		    <tr>
-			<th>Account Number</th>
-			<th>Balance(Rs.)</th>
-			<th>Debit Transactions</th>
-			<th>Credit Transactions</th>
-			<th>View Details</th>
-		    </tr>
-		    <tbody>
-			<c:forEach items="${client.accounts}" var="account">
+		<div class="panel panel-primary">
+		    <div class="panel-heading"><h3 class="panel-title">Accounts Summary</h3></div>
+		    <div class="panel-body">
+			<table class="table table-striped table-bordered">
 			    <tr>
-				<td><c:out value="${account.accountNumber}"/></td>
-				<td><c:out value="${account.balance}"/></td>
-				<td><c:out value="${account.toTransactions.size()}"/></td>
-				<td><c:out value="${account.fromTransactions.size()}"/></td>
-				<td>
-				    <form accept-charset="UTF-8" role="form" method="GET" action="<c:url value="/account/${account.id}"/>">
-					<button type="submit" value="view" class="btn btn-primary btn-sm">
-					    <span class="glyphicon glyphicon-eye-open"></span>  View Account
-					</button>
-				    </form>
-				</td>
+				<th>Account Number</th>
+				<th>Balance(Rs.)</th>
+				<th>Debit Transactions</th>
+				<th>Credit Transactions</th>
+				<th>View Details</th>
 			    </tr>
-			</c:forEach>
-		    </tbody>
-		</table>
+			    <tbody>
+				<c:forEach items="${client.accounts}" var="account">
+				    <tr>
+					<td><c:out value="${account.accountNumber}"/></td>
+					<td><c:out value="${account.balance}"/></td>
+					<td><c:out value="${account.toTransactions.size()}"/></td>
+					<td><c:out value="${account.fromTransactions.size()}"/></td>
+					<td>
+					    <form accept-charset="UTF-8" role="form" method="GET" action="<c:url value="/account/${account.id}"/>">
+						<button type="submit" value="view" class="btn btn-primary btn-sm">
+						    <span class="glyphicon glyphicon-eye-open"></span>  View Account
+						</button>
+					    </form>
+					</td>
+				    </tr>
+				</c:forEach>
+			    </tbody>
+			</table>
+		    </div>
+		</div>
 	    </div>
 	</div>
     </body>
