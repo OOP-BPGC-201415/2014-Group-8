@@ -7,7 +7,6 @@ package bits.ewallet.entity;
 
 import java.io.Serializable;
 import java.sql.Date;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -30,11 +29,11 @@ public class TransactionRecord implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "to_account_id", insertable = true, updatable = true)
 	private Account toAccount;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "from_account_id", insertable = true, updatable = true)
 	private Account fromAccount;
 
