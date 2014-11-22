@@ -1,0 +1,14 @@
+1)Positives of our group
+People like Amit Gaiki already had knowledge of how to make a web app.He already knew about Spring framework.
+Helped us to learn a lot.
+Everyone helped each other and actively participated in making the whole project.
+
+
+2)Negative of our group
+Every work was done at the last moment.Even this txt file has been writtern at the last moment
+
+
+What would we do differently next time?
+Firstly since we all were new to spring and due to time constraint most coding part was done by Amit.
+And secondly we could have included an ssl encryption or spring security to make it more secure.
+Also we could make a version of the website for smartphones,so that less of data is used when accessing it from our phones.
