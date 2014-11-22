@@ -37,29 +37,46 @@ public class TransactionController {
 
 	@RequestMapping(value = "/credit", method = RequestMethod.GET)
 	public ModelAndView creditTransaction(@RequestParam("balance") Double balance, @RequestParam("account") Account account, @RequestParam("acc") Account acc) {
-
-		ModelAndView mav = new ModelAndView("transaction/success");
 		TransactionRecord tr = transactionService.saveTransaction(account, acc, balance);
-		mav.addObject("transaction", tr);
-		return mav;
+		if (tr.getId() != null) {
+			ModelAndView mav = new ModelAndView("transaction/success");
+			mav.addObject("transaction", tr);
+			return mav;
+		} else {
+			ModelAndView mav = new ModelAndView("transaction/failure");
+			mav.addObject("transaction", tr);
+			return mav;
+		}
 	}
 
 	@RequestMapping(value = "/debit/{id}", method = RequestMethod.GET)
-	public ModelAndView rechargeAccount(@RequestParam("amount") Double amount, @PathVariable("id") Account account){
-		ModelAndView mav = new ModelAndView("transaction/success");
+	public ModelAndView rechargeAccount(@RequestParam("amount") Double amount, @PathVariable("id") Account account) {
 		TransactionRecord tr = transactionService.saveTransaction(account, amount);
-		mav.addObject("transaction", tr);
-		return mav;
+		if (tr.getId() != null) {
+			ModelAndView mav = new ModelAndView("transaction/success");
+			mav.addObject("transaction", tr);
+			return mav;
+		} else {
+			ModelAndView mav = new ModelAndView("transaction/failure");
+			mav.addObject("transaction", tr);
+			return mav;
+		}
+
 	}
 
 	@RequestMapping(value = "/debit", method = RequestMethod.GET)
 	public ModelAndView debitTransaction(@RequestParam("balance") Double balance, @RequestParam("pin") String pin, @RequestParam("account") Account account, @RequestParam("acc") Account acc) {
 
-		System.out.println("this called");
-		ModelAndView mav = new ModelAndView("transaction/success");
 		TransactionRecord tr = transactionService.saveTransaction(acc, account, balance, pin);
-		mav.addObject("transaction", tr);
-		return mav;
+		if (tr.getId() != null) {
+			ModelAndView mav = new ModelAndView("transaction/success");
+			mav.addObject("transaction", tr);
+			return mav;
+		} else {
+			ModelAndView mav = new ModelAndView("transaction/failure");
+			mav.addObject("transaction", tr);
+			return mav;
+		}
 	}
 
 }
