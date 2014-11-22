@@ -4,6 +4,7 @@
     Author     : amit
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:include page="../header.jsp"/>
 <!DOCTYPE html>
@@ -37,6 +38,19 @@
 			<p>Amount : ${transaction.amount}</p>
 		    </div>
 		</div>
+	    </div>
+	</div>
+
+	<br>
+	<br>
+
+	<div class="row">
+	    <div class="col-md-5"></div>
+	    <div class="col-md-1">
+		<form accept-charset="UTF-8" role="form" method="POST" action="<c:url value="/account/traccount"/>">
+		    <input class="form-control" name="account" type="hidden" value="${account.id}">
+		    <button type="submit" value="view" class="btn btn-primary btn-sm">Back</button>
+		</form>
 	    </div>
 	</div>
     </body>

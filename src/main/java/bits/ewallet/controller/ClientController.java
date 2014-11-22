@@ -45,12 +45,17 @@ public class ClientController {
 	@RequestMapping(value = "/dashboard", method = RequestMethod.POST)
 	public ModelAndView dashboard(@RequestParam String username, @RequestParam String password) {
 		List<Client> clients = clientRepository.findByUsername(username);
-		if (clients.get(0).getPassword().equals(password)) {
-			ModelAndView mav = new ModelAndView("client/dashboard");
-			double balance = clientService.getTotalBalance(clients.get(0));
-			mav.addObject("client", clients.get(0));
-			mav.addObject("balance", balance);
-			return mav;
+		if (!clients.isEmpty()) {
+			if (clients.get(0).getPassword().equals(password)) {
+				ModelAndView mav = new ModelAndView("client/dashboard");
+				double balance = clientService.getTotalBalance(clients.get(0));
+				mav.addObject("client", clients.get(0));
+				mav.addObject("balance", balance);
+				return mav;
+			} else {
+				ModelAndView mav = new ModelAndView("login/incorrect");
+				return mav;
+			}
 		} else {
 			ModelAndView mav = new ModelAndView("login/incorrect");
 			return mav;

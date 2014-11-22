@@ -41,10 +41,12 @@ public class TransactionController {
 		if (tr.getId() != null) {
 			ModelAndView mav = new ModelAndView("transaction/success");
 			mav.addObject("transaction", tr);
+			mav.addObject("account", account);
 			return mav;
 		} else {
 			ModelAndView mav = new ModelAndView("transaction/failure");
 			mav.addObject("transaction", tr);
+			mav.addObject("account", account);
 			return mav;
 		}
 	}
@@ -71,10 +73,12 @@ public class TransactionController {
 		if (tr.getId() != null) {
 			ModelAndView mav = new ModelAndView("transaction/success");
 			mav.addObject("transaction", tr);
+			mav.addObject("account", account);
 			return mav;
 		} else {
 			ModelAndView mav = new ModelAndView("transaction/failure");
 			mav.addObject("transaction", tr);
+			mav.addObject("account", account);
 			return mav;
 		}
 	}
