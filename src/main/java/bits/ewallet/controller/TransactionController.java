@@ -35,21 +35,23 @@ public class TransactionController {
 	@Autowired
 	private TransactionService transactionService;
 
-	@RequestMapping(value = "/credit", method = RequestMethod.GET)
+	@RequestMapping(value = "/credit", method = RequestMethod.POST)
 	public ModelAndView creditTransaction(@RequestParam("balance") Double balance, @RequestParam("account") Account account, @RequestParam("acc") Account acc) {
 		TransactionRecord tr = transactionService.saveTransaction(account, acc, balance);
 		if (tr.getId() != null) {
 			ModelAndView mav = new ModelAndView("transaction/success");
 			mav.addObject("transaction", tr);
+			mav.addObject("account", account);
 			return mav;
 		} else {
 			ModelAndView mav = new ModelAndView("transaction/failure");
 			mav.addObject("transaction", tr);
+			mav.addObject("account", account);
 			return mav;
 		}
 	}
 
-	@RequestMapping(value = "/debit/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/debit/{id}", method = RequestMethod.POST)
 	public ModelAndView rechargeAccount(@RequestParam("amount") Double amount, @PathVariable("id") Account account) {
 		TransactionRecord tr = transactionService.saveTransaction(account, amount);
 		if (tr.getId() != null) {
@@ -64,17 +66,19 @@ public class TransactionController {
 
 	}
 
-	@RequestMapping(value = "/debit", method = RequestMethod.GET)
+	@RequestMapping(value = "/debit", method = RequestMethod.POST)
 	public ModelAndView debitTransaction(@RequestParam("balance") Double balance, @RequestParam("pin") String pin, @RequestParam("account") Account account, @RequestParam("acc") Account acc) {
 
 		TransactionRecord tr = transactionService.saveTransaction(acc, account, balance, pin);
 		if (tr.getId() != null) {
 			ModelAndView mav = new ModelAndView("transaction/success");
 			mav.addObject("transaction", tr);
+			mav.addObject("account", account);
 			return mav;
 		} else {
 			ModelAndView mav = new ModelAndView("transaction/failure");
 			mav.addObject("transaction", tr);
+			mav.addObject("account", account);
 			return mav;
 		}
 	}

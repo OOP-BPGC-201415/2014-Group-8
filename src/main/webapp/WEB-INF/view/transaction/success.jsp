@@ -4,7 +4,9 @@
     Author     : amit
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<jsp:include page="../header.jsp"/>
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,9 +14,44 @@
         <title>Transaction details</title>
     </head>
     <body>
-        <h1>Transaction completed successfully</h1>
-	<h2>Credit account : ${transaction.fromAccount.accountNumber}</h2>
-	<h2>Debit account : ${transaction.toAccount.accountNumber}</h2>
-	<h2>Amount : ${transaction.amount}</h2>
+	<div class="row">
+	    <div class="col-md-4"></div>
+	    <div class="col-md-4">
+		<h1 class="page-header">Transaction Summary</h1>
+	    </div>
+	</div>
+
+	<br>
+	<br>
+
+	<div class="row">
+	    <div class="col-md-4"></div>
+	    <div class="col-md-4">
+		<div class="panel panel-success">
+		    <div class="panel-heading">
+			<h3 class="panel-title">Transaction Details</h3>
+		    </div>
+		    <div class="panel-body">
+			<p>Transaction Status : Success</p>
+			<p>Credit account : ${transaction.fromAccount.accountNumber}</p>
+			<p>Debit account : ${transaction.toAccount.accountNumber}</p>
+			<p>Amount : ${transaction.amount}</p>
+		    </div>
+		</div>
+	    </div>
+	</div>
+
+	<br>
+	<br>
+
+	<div class="row">
+	    <div class="col-md-5"></div>
+	    <div class="col-md-1">
+		<form accept-charset="UTF-8" role="form" method="POST" action="<c:url value="/account/traccount"/>">
+		    <input class="form-control" name="account" type="hidden" value="${account.id}">
+		    <button type="submit" value="view" class="btn btn-primary btn-sm">Back</button>
+		</form>
+	    </div>
+	</div>
     </body>
 </html>

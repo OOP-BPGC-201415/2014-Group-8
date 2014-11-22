@@ -57,7 +57,7 @@
 		<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 		<h4 class="modal-title" id="myModalLabel">Transfer from ${account.accountNumber} to ${accounts.get(0).accountNumber}</h4>
 	    </div>
-	    <form accept-charset="UTF-8" role="form" method="GET" action="<c:url value="/transaction/credit"/>">
+	    <form accept-charset="UTF-8" role="form" method="POST" action="<c:url value="/transaction/credit"/>">
 		<div class="modal-body">
 		    <label>Enter Amount(Rs.)</label>
 		    <input class="form-control" placeholder="Amount" name="balance" type="text" autofocus="true" autocomplete="true" value="">
@@ -82,7 +82,7 @@
 		<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 		<h4 class="modal-title" id="myModalLabel">Transfer from ${accounts.get(0).accountNumber} to ${account.accountNumber}</h4>
 	    </div>
-	    <form accept-charset="UTF-8" role="form" method="GET" action="<c:url value="/transaction/debit"/>">
+	    <form accept-charset="UTF-8" role="form" method="POST" action="<c:url value="/transaction/debit"/>">
 		<div class="modal-body">
 		    <label>Enter Amount(Rs.)</label>
 		    <input class="form-control" placeholder="Amount" name="balance" type="text" autofocus="true" autocomplete="true" value="">
