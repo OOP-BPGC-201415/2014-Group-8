@@ -42,43 +42,73 @@ public class TransactionRecord implements Serializable {
 
 	@Column(name = "transaction_date")
 	private Date transactionDate;
-
+/**
+ *
+ * @return database generated id (primary key)
+ */
 	public Long getId() {
 		return id;
 	}
-
+/**
+ *
+ * @param id primary key for record in database. Don't use with ORM
+ */
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+/**
+ *
+ * @return get debit account for this transaction
+ */
 	public Account getToAccount() {
 		return toAccount;
 	}
-
+/**
+ *
+ * @param toAccount set debit transaction for this account
+ */
 	public void setToAccount(Account toAccount) {
 		this.toAccount = toAccount;
 	}
-
+/**
+ *
+ * @return get credit account for this transaction
+ */
 	public Account getFromAccount() {
 		return fromAccount;
 	}
-
+/**
+ *
+ * @param fromAccount set credit transaction for this account
+ */
 	public void setFromAccount(Account fromAccount) {
 		this.fromAccount = fromAccount;
 	}
-
+/**
+ *
+ * @return transaction amount
+ */
 	public Double getAmount() {
 		return amount;
 	}
-
+/**
+ *
+ * @param amount set amount to be transferred
+ */
 	public void setAmount(Double amount) {
 		this.amount = amount;
 	}
-
+/**
+ *
+ * @return transaction date
+ */
 	public Date getTransactionDate() {
 		return transactionDate;
 	}
-
+/**
+ *
+ * @param transactionDate set date for the transaction
+ */
 	public void setTransactionDate(Date transactionDate) {
 		this.transactionDate = transactionDate;
 	}

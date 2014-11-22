@@ -12,6 +12,7 @@ import bits.ewallet.repository.TransactionRecordRepository;
 import bits.ewallet.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,11 +44,20 @@ public class TransactionController {
 		return mav;
 	}
 
+	@RequestMapping(value = "/debit/{id}", method = RequestMethod.GET)
+	public ModelAndView rechargeAccount(@RequestParam("amount") Double amount, @PathVariable("id") Account account){
+		ModelAndView mav = new ModelAndView("transaction/success");
+		TransactionRecord tr = transactionService.saveTransaction(account, amount);
+		mav.addObject("transaction", tr);
+		return mav;
+	}
+
 	@RequestMapping(value = "/debit", method = RequestMethod.GET)
 	public ModelAndView debitTransaction(@RequestParam("balance") Double balance, @RequestParam("pin") String pin, @RequestParam("account") Account account, @RequestParam("acc") Account acc) {
 
+		System.out.println("this called");
 		ModelAndView mav = new ModelAndView("transaction/success");
-		TransactionRecord tr = transactionService.saveTransaction(account, acc, balance, pin);
+		TransactionRecord tr = transactionService.saveTransaction(acc, account, balance, pin);
 		mav.addObject("transaction", tr);
 		return mav;
 	}

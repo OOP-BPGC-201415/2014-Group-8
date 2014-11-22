@@ -28,6 +28,11 @@ public class ClientService {
 	@Autowired
 	private AccountService accountService;
 
+/**
+ *
+ * @param client client to whom a new account needs to be assigned
+ * @return client with account added to his name
+ */
 	public Client addAccount(Client client){
 		Account a = new Account();
 		a.setAccountNumber("aa");
@@ -39,10 +44,14 @@ public class ClientService {
 		clientRepository.saveAndFlush(client);
 		return client;
 	}
-
+/**
+ *
+ * @param client client whose total balance is to be viewed
+ * @return total balance across all accounts for this client
+ */
 	public double getTotalBalance(Client client){
 		double balance = 0;
-		for(Account a : client.getAccounts()){	
+		for(Account a : client.getAccounts()){
 			balance += a.getBalance();
 		}
 		return balance;

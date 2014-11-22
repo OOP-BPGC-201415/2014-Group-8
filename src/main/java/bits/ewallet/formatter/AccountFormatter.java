@@ -21,11 +21,22 @@ public class AccountFormatter implements Formatter<Account>{
 
 	@Autowired
 	private AccountRepository accountRepository;
-
+/**
+ *
+ * @param object account entity to be formatted
+ * @param locale
+ * @return string value for the corresponding entity
+ */
 	public String print(Account object, Locale locale) {
 		return Objects.toString(object.getId());
 	}
-
+/**
+ *
+ * @param string string for the object
+ * @param locale
+ * @return account from database table corresponding to string
+ * @throws ParseException
+ */
 	public Account parse(String string, Locale locale) throws ParseException {
 		return accountRepository.findOne(Long.valueOf(string));
 	}

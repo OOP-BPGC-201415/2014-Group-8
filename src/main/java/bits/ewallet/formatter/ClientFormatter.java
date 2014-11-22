@@ -21,11 +21,22 @@ public class ClientFormatter implements Formatter<Client>{
 
 	@Autowired
 	private ClientRepository clientRepository;
-
+/**
+ *
+ * @param object client entity to be formatted
+ * @param locale
+ * @return string value for the corresponding entity
+ */
 	public String print(Client object, Locale locale) {
 		return Objects.toString(object.getId());
 	}
-
+/**
+ *
+ * @param string string for the object
+ * @param locale
+ * @return client from database table corresponding to string
+ * @throws ParseException
+ */
 	public Client parse(String string, Locale locale) throws ParseException {
 		return clientRepository.findOne(Long.valueOf(string));
 	}

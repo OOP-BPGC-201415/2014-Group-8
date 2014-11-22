@@ -17,7 +17,7 @@
 	<div class="row">
 	    <div class="col-md-4"></div>
 	    <div class="col-md-4">
-		<h1 class="page-header">Account Summary and Transactions</h1>
+		<h1 class="page-header">Account Transactions</h1>
 	    </div>
 	</div>
 
@@ -27,7 +27,7 @@
 	<div class="row">
 	    <div class="col-md-4"></div>
 	    <div class="col-md-4">
-		<div class="panel panel-default">
+		<div class="panel panel-primary">
 		    <div class="panel-heading">
 			<h3 class="panel-title">Account Details</h3>
 		    </div>
@@ -43,23 +43,23 @@
 	<br>
 	<br>
 
-	<div class="row">
-	    <div class="col-md-4"></div>
-	    <div class="col-md-4">
-		<form accept-charset="UTF-8" role="form" method="GET" action="<c:url value="/account/search"/>">
-		    <div class="input-group">
-			<input class="form-control" placeholder="Account Number" name="accountNumber" type="text" autofocus="true" autocomplete="true" value="${accountNumber}"/>
-			<input class="form-control" name="accountId" type="hidden" value="${account.id}">
-			<span class="input-group-btn">
-			    <button class="btn btn-primary">
-				<span class="fa fa-search fa-fw fa-lg"></span>
-				Make Transaction
-			    </button>
-			</span>
+		<div class="row">
+		    <div class="col-md-4"></div>
+		    <div class="col-md-4">
+			<form accept-charset="UTF-8" role="form" method="GET" action="<c:url value="/account/search"/>">
+			    <div class="input-group">
+				<input class="form-control" placeholder="Account Number" name="accountNumber" type="text" autofocus="true" autocomplete="true" value="${accountNumber}"/>
+				<input class="form-control" name="accountId" type="hidden" value="${account.id}">
+				<span class="input-group-btn">
+				    <button class="btn btn-primary">
+					<span class="fa fa-search fa-fw fa-lg"></span>
+					Make Transaction
+				    </button>
+				</span>
+			    </div>
+			</form>
 		    </div>
-		</form>
-	    </div>
-	</div>
+		</div>
 
 	<br>
 	<br>

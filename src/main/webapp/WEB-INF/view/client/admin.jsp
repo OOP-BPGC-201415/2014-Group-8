@@ -16,30 +16,44 @@
     <body>
         <h1>Hello .. Logged in as admin!!</h1>
 	<p>There are currently ${totalClients} users</p>
-	<table class="table table-striped table-bordered">
-	    <tr>
-		<th>User Name</th>
-		<th>User Accounts</th>
-		<th>Add accounts</th>
-	    </tr>
-	    <tbody>
-		<c:forEach items="${clients}" var="client">
-		    <tr>
-			<td><c:out value="${client.username}"/></td>
-			<td><c:out value="${client.accounts.size()}"/></td>
-			<td>
-			    <form accept-charset="UTF-8" role="form" method="GET" action="<c:url value="/client/${client.id}/account"/>">
-				<button type="submit" value="Add Account" class="btn btn-primary btn-lg">
-				    <span class="glyphicon glyphicon-plus"></span>  Add Account
-				</button>
-			    </form>
-			</td>
-		    </tr>
-		</c:forEach>
-	    </tbody>
-	</table>
 
 	<div class="row">
+	    <div class="col-md-2"></div>
+	    <div class="col-md-8">
+		<table class="table table-striped table-bordered">
+		    <tr>
+			<th>User Name</th>
+			<th>User Accounts</th>
+			<th>Add accounts</th>
+			<th>View Details</th>
+		    </tr>
+		    <tbody>
+			<c:forEach items="${clients}" var="client">
+			    <tr>
+				<td><c:out value="${client.username}"/></td>
+				<td><c:out value="${client.accounts.size()}"/></td>
+				<td>
+				    <form accept-charset="UTF-8" role="form" method="GET" action="<c:url value="/client/${client.id}/account"/>">
+					<button type="submit" value="Add Account" class="btn btn-primary btn-xs">
+					    <span class="glyphicon glyphicon-plus"></span>  Add Account
+					</button>
+				    </form>
+				</td>
+				<td>
+				    <form accept-charset="UTF-8" role="form" method="GET" action="<c:url value="/client/${client.id}/dashboard"/>">
+					<button type="submit" value="Add Account" class="btn btn-primary btn-xs">
+					    <span class="glyphicon glyphicon-eye-close"></span> View Details
+					</button>
+				    </form>
+				</td>
+			    </tr>
+			</c:forEach>
+		    </tbody>
+		</table>
+	    </div>
+	</div>
+
+<!--	<div class="row">
 	    <div class="col-md-2"></div>
 	    <div class="col-md-6">
 		<div class="list-group">
@@ -55,9 +69,9 @@
 		    </c:forEach>
 		</div>
 	    </div>
-	</div>
+	</div>-->
 
-	<div class="modal fade" id="accountmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<!--	<div class="modal fade" id="accountmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	    <div class="modal-dialog">
 		<div class="modal-content">
 		    <div class="modal-header">
@@ -72,6 +86,6 @@
 		    </div>
 		</div>
 	    </div>
-	</div>
+	</div>-->
     </body>
 </html>

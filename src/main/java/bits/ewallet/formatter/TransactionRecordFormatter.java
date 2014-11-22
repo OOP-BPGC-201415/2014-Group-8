@@ -21,11 +21,22 @@ public class TransactionRecordFormatter implements Formatter<TransactionRecord>{
 
 	@Autowired
 	private TransactionRecordRepository transactionRecordRepository;
-
+/**
+ *
+ * @param object transaction entity to be formatted
+ * @param locale
+ * @return string value for the corresponding entity
+ */
 	public String print(TransactionRecord object, Locale locale) {
 		return Objects.toString(object.getId());
 	}
-
+/**
+ *
+ * @param string string for the object
+ * @param locale
+ * @return transaction from database table corresponding to string
+ * @throws ParseException
+ */
 	public TransactionRecord parse(String string, Locale locale) throws ParseException {
 		return transactionRecordRepository.findOne(Long.valueOf(string));
 	}

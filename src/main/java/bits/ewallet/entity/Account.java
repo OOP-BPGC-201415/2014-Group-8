@@ -62,75 +62,129 @@ public class Account implements Serializable {
 	@OneToMany( mappedBy = "fromAccount", orphanRemoval = true)
 	private List<TransactionRecord> fromTransactions;
 
-
+/**
+ *
+ * @return database generated id (primary key)
+ */
 	public Long getId() {
 		return id;
 	}
-
+/**
+ *
+ * @param id primary key for record in database. Don't use if using ORM
+ */
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+/**
+ *
+ * @return account number of entity
+ */
 	public String getAccountNumber() {
 		return accountNumber;
 	}
-
+/**
+ *
+ * @return database generated sequence value assigned to the record
+ */
 	public Long getAccSeq() {
 		return accSeq;
 	}
-
+/**
+ *
+ * @param accSeq to set the sequence value. Do not use explicitly with ORM
+ */
 	public void setAccSeq(Long accSeq) {
 		this.accSeq = accSeq;
 	}
-
+/**
+ *
+ * @param accountNumber account number of the entity
+ */
 	public void setAccountNumber(String accountNumber) {
 		this.accountNumber = accountNumber;
 	}
-
+/**
+ *
+ * @return identification key similar to password for the entity
+ */
 	public String getUniqueId() {
 		return uniqueId;
 	}
-
+/**
+ *
+ * @param uniqueId set identification key like password
+ */
 	public void setUniqueId(String uniqueId) {
 		this.uniqueId = uniqueId;
 	}
-
+/**
+ *
+ * @return current balance in the account
+ */
 	public Double getBalance() {
 		return balance;
 	}
-
+/**
+ *
+ * @param balance set balance for the entity
+ */
 	public void setBalance(Double balance) {
 		this.balance = balance;
 	}
-
+/**
+ *
+ * @return id of client this entity is assigned to
+ */
 	public Client getClient() {
 		return client;
 	}
-
+/**
+ *
+ * @param client assign client for this entity
+ */
 	public void setClient(Client client) {
 		this.client = client;
 	}
-
+/**
+ *
+ * @return get all debit transactions for this account
+ */
 	public List<TransactionRecord> getToTransactions() {
 		return toTransactions;
 	}
-
+/**
+ *
+ * @param toTransactions set debit transactions for the account
+ */
 	public void setToTransactions(List<TransactionRecord> toTransactions) {
 		this.toTransactions = toTransactions;
 	}
-
+/**
+ *
+ * @param tr add transaction to debit transactions
+ */
 	public void addToTransaction(TransactionRecord tr){
 		this.toTransactions.add(tr);
 	}
-
+/**
+ *
+ * @return get all credit transactions for this account
+ */
 	public List<TransactionRecord> getFromTransactions() {
 		return fromTransactions;
 	}
-
+/**
+ *
+ * @param fromTransactions set credit transactions for the account
+ */
 	public void setFromTransactions(List<TransactionRecord> fromTransactions) {
 		this.fromTransactions = fromTransactions;
 	}
-
+/**
+ *
+ * @param tr add transaction to credit transactions
+ */
 	public void addFromTransaction(TransactionRecord tr){
 		this.fromTransactions.add(tr);
 	}

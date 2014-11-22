@@ -42,7 +42,7 @@
 			    <input class="form-control" placeholder="Password" name="password" type="password" value="${client.password}">
 			</div>
 
-			<div class="form-group">
+<!--			<div class="form-group">
 			    <label class="col-lg-3 control-label">Client Type</label>
 			    <div class="col-lg-10">
 				<div class="radio">
@@ -58,7 +58,7 @@
 				    </label>
 				</div>
 			    </div>
-			</div>
+			</div>-->
 			<input class="btn btn-lg btn-primary btn-block" type="submit" value="Signup">
 		    </fieldset>
 		</form>

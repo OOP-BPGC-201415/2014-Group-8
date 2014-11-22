@@ -7,6 +7,7 @@ package bits.ewallet.service;
 
 import bits.ewallet.entity.Account;
 import bits.ewallet.entity.TransactionRecord;
+import bits.ewallet.repository.AccountRepository;
 import bits.ewallet.repository.TransactionRecordRepository;
 import java.sql.Date;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,17 +21,24 @@ import org.springframework.stereotype.Service;
 public class TransactionService {
 
 	@Autowired
+	private AccountRepository accountRepository;
+
+	@Autowired
 	private TransactionRecordRepository transactionRecordRepository;
 
 	@Autowired
 	private AccountService accountService;
 
-	public TransactionRecord saveTransaction(Account fromAccount, Account toAccount, double amount){
+/**
+ *
+ * @param toAccount debit account to transfer amount to
+ * @param amount transaction amount
+ * @return saved transaction record with database id assigned
+ */
+	public TransactionRecord saveTransaction(Account toAccount, double amount) {
 
 		accountService.addBalanceAmount(toAccount, amount);
-		accountService.addBalanceAmount(fromAccount, -amount);
 		TransactionRecord tr = new TransactionRecord();
-		tr.setFromAccount(fromAccount);
 		tr.setToAccount(toAccount);
 		tr.setAmount(amount);
 		tr.setTransactionDate(new Date(new java.util.Date().getTime()));
@@ -38,14 +46,62 @@ public class TransactionService {
 		return tr;
 	}
 
-	public TransactionRecord saveTransaction(Account fromAccount, Account toAccount, double amount, String pin){
+/**
+ *
+ * @param fromAccount credit account to transfer money from
+ * @param toAccount debit account to transfer amount to
+ * @param amount transaction amount
+ * @return saved transaction record with database id assigned
+ */
+	public TransactionRecord saveTransaction(Account fromAccount, Account toAccount, double amount) {
+
+		TransactionRecord tr = new TransactionRecord();
+		if (accountService.checkBalance(fromAccount, amount)) {
+			accountService.addBalanceAmount(toAccount, amount);
+			accountService.addBalanceAmount(fromAccount, -amount);
+			tr.setFromAccount(fromAccount);
+			tr.setToAccount(toAccount);
+			tr.setAmount(amount);
+			tr.setTransactionDate(new Date(new java.util.Date().getTime()));
+			transactionRecordRepository.saveAndFlush(tr);
+		}
+		return tr;
+	}
+
+/**
+ *
+ * @param fromAccount credit account to transfer money from
+ * @param toAccount debit account to transfer amount to
+ * @param amount transaction amount
+ * @param pin identification key of credit account (fromAccount)
+ * @return saved transaction record with database id assigned
+ */
+	public TransactionRecord saveTransaction(Account fromAccount, Account toAccount, double amount, String pin) {
 
 		TransactionRecord tr = new TransactionRecord();
 		tr.setFromAccount(fromAccount);
 		tr.setToAccount(toAccount);
-		tr.setAmount(amount);
 		tr.setTransactionDate(new Date(new java.util.Date().getTime()));
-		transactionRecordRepository.saveAndFlush(tr);
-		return tr;
+
+		if (accountService.checkBalance(fromAccount, amount)) {
+			tr.setAmount(amount);
+			if (fromAccount.getUniqueId() != null) {
+				if (!fromAccount.getUniqueId().equals(pin)) {
+					return tr;
+				} else {
+					accountService.addBalanceAmount(toAccount, amount);
+					accountService.addBalanceAmount(fromAccount, -amount);
+					transactionRecordRepository.saveAndFlush(tr);
+					return tr;
+				}
+			} else {
+				accountService.addBalanceAmount(toAccount, amount);
+				accountService.addBalanceAmount(fromAccount, -amount);
+				transactionRecordRepository.saveAndFlush(tr);
+				return tr;
+			}
+		} else {
+			return tr;
+		}
 	}
 }
