@@ -41,40 +41,21 @@ public class ClientController {
 	@Autowired
 	private ClientService clientService;
 
-	//admin dashboard
-	@RequestMapping(value = "/admin", method = RequestMethod.GET)
-	public ModelAndView adminList() {
-		ModelAndView mav = new ModelAndView("client/admin");
-		List clients = clientRepository.findAll();
-		int totalClients = clients.size();
-		mav.addObject("clients", clients);
-		mav.addObject("totalClients", totalClients);
-		return mav;
-	}
-
 	//dashboard of client on login
 	@RequestMapping(value = "/dashboard", method = RequestMethod.POST)
 	public ModelAndView dashboard(@RequestParam String username, @RequestParam String password) {
-		ModelAndView mav = new ModelAndView("client/dashboard");
 		List<Client> clients = clientRepository.findByUsername(username);
 		if (clients.get(0).getPassword().equals(password)) {
+			ModelAndView mav = new ModelAndView("client/dashboard");
 			double balance = clientService.getTotalBalance(clients.get(0));
 			mav.addObject("client", clients.get(0));
 			mav.addObject("balance", balance);
+			return mav;
+		} else {
+			ModelAndView mav = new ModelAndView("login/incorrect");
+			return mav;
 		}
-		return mav;
 	}
-
-//	@RequestMapping(value = "/{id}/dashboard", method = RequestMethod.GET)
-//	public @ResponseBody
-//	ModelAndView clientDashboard(@PathVariable("id") Client client) {
-//
-//		ModelAndView mav = new ModelAndView("client/dashboard");
-//		double balance = clientService.getTotalBalance(client);
-//		mav.addObject("client", client);
-//		mav.addObject("balance", balance);
-//		return mav;
-//	}
 
 	//called by button on admin page to add account to client
 	@RequestMapping(value = "/{id}/account", method = RequestMethod.GET)
@@ -102,17 +83,4 @@ public class ClientController {
 		return mav;
 	}
 
-//	@RequestMapping(value = "/employee", method = RequestMethod.GET)
-//	public ModelAndView employeeDashBoard(){
-//		ModelAndView mav = new ModelAndView("client/employee");
-////		mav.addObject(clientRepository.findOne(employee.getId()));
-//		return mav;
-//	}
-//
-//	@RequestMapping(value = "/merchant", method = RequestMethod.GET)
-//	public @ResponseBody ModelAndView merchantDashBoard(){
-//		ModelAndView mav = new ModelAndView("client/merchant");
-////		mav.addObject(clientRepository.findOne(merchant.getId()));
-//		return mav;
-//	}
 }

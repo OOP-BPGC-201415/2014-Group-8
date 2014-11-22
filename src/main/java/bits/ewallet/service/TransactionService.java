@@ -29,12 +29,12 @@ public class TransactionService {
 	@Autowired
 	private AccountService accountService;
 
-/**
- *
- * @param toAccount debit account to transfer amount to
- * @param amount transaction amount
- * @return saved transaction record with database id assigned
- */
+	/**
+	 *
+	 * @param toAccount debit account to transfer amount to
+	 * @param amount transaction amount
+	 * @return saved transaction record with database id assigned
+	 */
 	public TransactionRecord saveTransaction(Account toAccount, double amount) {
 
 		accountService.addBalanceAmount(toAccount, amount);
@@ -46,45 +46,45 @@ public class TransactionService {
 		return tr;
 	}
 
-/**
- *
- * @param fromAccount credit account to transfer money from
- * @param toAccount debit account to transfer amount to
- * @param amount transaction amount
- * @return saved transaction record with database id assigned
- */
+	/**
+	 *
+	 * @param fromAccount credit account to transfer money from
+	 * @param toAccount debit account to transfer amount to
+	 * @param amount transaction amount
+	 * @return saved transaction record with database id assigned
+	 */
 	public TransactionRecord saveTransaction(Account fromAccount, Account toAccount, double amount) {
 
 		TransactionRecord tr = new TransactionRecord();
+		tr.setFromAccount(fromAccount);
+		tr.setToAccount(toAccount);
+		tr.setAmount(amount);
+		tr.setTransactionDate(new Date(new java.util.Date().getTime()));
 		if (accountService.checkBalance(fromAccount, amount)) {
 			accountService.addBalanceAmount(toAccount, amount);
 			accountService.addBalanceAmount(fromAccount, -amount);
-			tr.setFromAccount(fromAccount);
-			tr.setToAccount(toAccount);
-			tr.setAmount(amount);
-			tr.setTransactionDate(new Date(new java.util.Date().getTime()));
 			transactionRecordRepository.saveAndFlush(tr);
 		}
 		return tr;
 	}
 
-/**
- *
- * @param fromAccount credit account to transfer money from
- * @param toAccount debit account to transfer amount to
- * @param amount transaction amount
- * @param pin identification key of credit account (fromAccount)
- * @return saved transaction record with database id assigned
- */
+	/**
+	 *
+	 * @param fromAccount credit account to transfer money from
+	 * @param toAccount debit account to transfer amount to
+	 * @param amount transaction amount
+	 * @param pin identification key of credit account (fromAccount)
+	 * @return saved transaction record with database id assigned
+	 */
 	public TransactionRecord saveTransaction(Account fromAccount, Account toAccount, double amount, String pin) {
 
 		TransactionRecord tr = new TransactionRecord();
 		tr.setFromAccount(fromAccount);
 		tr.setToAccount(toAccount);
+		tr.setAmount(amount);
 		tr.setTransactionDate(new Date(new java.util.Date().getTime()));
 
 		if (accountService.checkBalance(fromAccount, amount)) {
-			tr.setAmount(amount);
 			if (fromAccount.getUniqueId() != null) {
 				if (!fromAccount.getUniqueId().equals(pin)) {
 					return tr;
