@@ -54,7 +54,8 @@
 					<td><c:out value="${account.toTransactions.size()}"/></td>
 					<td><c:out value="${account.fromTransactions.size()}"/></td>
 					<td>
-					    <form accept-charset="UTF-8" role="form" method="GET" action="<c:url value="/account/${account.id}"/>">
+					    <form accept-charset="UTF-8" role="form" method="POST" action="<c:url value="/account/traccount"/>">
+						<input class="form-control" name="account" type="hidden" value="${account.id}">
 						<button type="submit" value="view" class="btn btn-primary btn-sm">
 						    <span class="glyphicon glyphicon-eye-open"></span>  View Account
 						</button>

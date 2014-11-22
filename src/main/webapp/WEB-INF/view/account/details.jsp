@@ -47,7 +47,7 @@
 		<div class="row">
 		    <div class="col-md-4"></div>
 		    <div class="col-md-4">
-			<form accept-charset="UTF-8" role="form" method="GET" action="<c:url value="/account/search"/>">
+			<form accept-charset="UTF-8" role="form" method="POST" action="<c:url value="/account/search"/>">
 			    <div class="input-group">
 				<input class="form-control" placeholder="Account Number" name="accountNumber" type="text" autofocus="true" autocomplete="true" value="${accountNumber}"/>
 				<input class="form-control" name="accountId" type="hidden" value="${account.id}">

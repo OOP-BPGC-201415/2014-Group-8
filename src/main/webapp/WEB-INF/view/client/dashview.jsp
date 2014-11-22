@@ -50,7 +50,7 @@
 				<td><c:out value="${account.toTransactions.size()}"/></td>
 				<td><c:out value="${account.fromTransactions.size()}"/></td>
 				<td>
-				    <form accept-charset="UTF-8" role="form" method="GET" action="<c:url value="/transaction/debit/${account.id}"/>">
+				    <form accept-charset="UTF-8" role="form" method="POST" action="<c:url value="/transaction/debit/${account.id}"/>">
 					<input class="form-control" placeholder="Amount" name="amount" type="text" autofocus="true" autocomplete="true" value="">
 					<br>
 					<button type="submit" value="view" class="btn btn-primary btn-sm">
