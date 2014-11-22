@@ -30,6 +30,7 @@
 		<div class="panel panel-primary">
 		    <div class="panel-heading">
 			<h3 class="panel-title">Account Details</h3>
+			<!--<button class="pull-right"> Settings</button>-->
 		    </div>
 		    <div class="panel-body">
 			<p>Account Number : ${account.accountNumber}</p>
