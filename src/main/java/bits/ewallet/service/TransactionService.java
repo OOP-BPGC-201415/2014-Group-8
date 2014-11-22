@@ -41,8 +41,10 @@ public class TransactionService {
 		TransactionRecord tr = new TransactionRecord();
 		tr.setToAccount(toAccount);
 		tr.setAmount(amount);
+		toAccount.addToTransaction(tr);
 		tr.setTransactionDate(new Date(new java.util.Date().getTime()));
 		transactionRecordRepository.saveAndFlush(tr);
+		accountRepository.saveAndFlush(toAccount);
 		return tr;
 	}
 
@@ -59,11 +61,15 @@ public class TransactionService {
 		tr.setFromAccount(fromAccount);
 		tr.setToAccount(toAccount);
 		tr.setAmount(amount);
+		fromAccount.addFromTransaction(tr);
+		toAccount.addToTransaction(tr);
 		tr.setTransactionDate(new Date(new java.util.Date().getTime()));
 		if (accountService.checkBalance(fromAccount, amount)) {
 			accountService.addBalanceAmount(toAccount, amount);
 			accountService.addBalanceAmount(fromAccount, -amount);
 			transactionRecordRepository.saveAndFlush(tr);
+			accountRepository.saveAndFlush(toAccount);
+			accountRepository.saveAndFlush(fromAccount);
 		}
 		return tr;
 	}
@@ -82,6 +88,8 @@ public class TransactionService {
 		tr.setFromAccount(fromAccount);
 		tr.setToAccount(toAccount);
 		tr.setAmount(amount);
+		fromAccount.addFromTransaction(tr);
+		toAccount.addToTransaction(tr);
 		tr.setTransactionDate(new Date(new java.util.Date().getTime()));
 
 		if (accountService.checkBalance(fromAccount, amount)) {
@@ -92,12 +100,16 @@ public class TransactionService {
 					accountService.addBalanceAmount(toAccount, amount);
 					accountService.addBalanceAmount(fromAccount, -amount);
 					transactionRecordRepository.saveAndFlush(tr);
+					accountRepository.saveAndFlush(toAccount);
+					accountRepository.saveAndFlush(fromAccount);
 					return tr;
 				}
 			} else {
 				accountService.addBalanceAmount(toAccount, amount);
 				accountService.addBalanceAmount(fromAccount, -amount);
 				transactionRecordRepository.saveAndFlush(tr);
+				accountRepository.saveAndFlush(toAccount);
+				accountRepository.saveAndFlush(fromAccount);
 				return tr;
 			}
 		} else {
