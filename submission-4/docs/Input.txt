@@ -1,0 +1,14 @@
+INPUT:Username 
+INPUT:Password
+
+OUTPUT:ClientDash Board
+
+
+INPUT:Account Number
+Output:Account Details Dashboard
+
+
+
+INPUT:AdminUserName
+INPUT:Password
+Output:Admin Dashboard(jsp view)
